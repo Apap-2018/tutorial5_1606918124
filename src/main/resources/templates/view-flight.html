@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>View Flight</title>
+	</head>
+	<body>
+		<h3>Nama Pilot, Nomor Penerbangan, Origin-Destination, Year-Month-Date</h3>
+		<div th:each="flight : ${allFlightSesuai}">
+			<h3 th:text="${flight.pilot.name} + ', ' + ${flight.flightNumber} + ', ' + ${flight.origin} + '-' + ${flight.destination} + ', ' + ${flight.time} "></h3>
+		</div>
+	</body>
+</html>
