@@ -18,27 +18,30 @@ public class PilotController {
 	private PilotService pilotService;
 	
 	@RequestMapping("/")
-	private String home() {
+	private String home(Model model) {
+		model.addAttribute("title", "APAP");
 		return "home";
 	}
 	
 	@RequestMapping(value = "/pilot/add", method = RequestMethod.GET)
 	private String add(Model model) {
 		model.addAttribute("pilot", new PilotModel());
+		model.addAttribute("title", "Add Pilot");
 		return "addPilot";
 	}
 	
 	@RequestMapping(value = "/pilot/add", method = RequestMethod.POST)
-	private String addPilotSubmit(@ModelAttribute PilotModel pilot) {
+	private String addPilotSubmit(@ModelAttribute PilotModel pilot, Model model) {
 		pilotService.addPilot(pilot);
+		model.addAttribute("title", "APAP");
 		return "add";
 	}
 	
-	@RequestMapping(value = "/pilot/view")
+	@RequestMapping(value = "/pilot/view", method = RequestMethod.GET)
 	public String view(@RequestParam("licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
-		
 		model.addAttribute("pilot", pilot);
+		model.addAttribute("title", "View Pilot");
 		return "view-pilot";
 	}
 	
@@ -46,6 +49,7 @@ public class PilotController {
 	private String delete(@PathVariable(value = "licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		pilotService.deletePilot(pilot);
+		model.addAttribute("title", "APAP");
 		return "deletePilot";
 	}
 	
@@ -53,14 +57,16 @@ public class PilotController {
 	private String update(@PathVariable(value = "licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		model.addAttribute("pilot", pilot);
+		model.addAttribute("title", "Update Pilot");
 		return "updatePilot";
 	}
 	
 	@RequestMapping(value = "/pilot/update", method = RequestMethod.POST)
-	private String updatePilotSubmit(@ModelAttribute PilotModel pilot) {
+	private String updatePilotSubmit(@ModelAttribute PilotModel pilot, Model model) {
 		pilot.setName(pilot.getName());
 		pilot.setFlyHour(pilot.getFlyHour());
 		pilotService.addPilot(pilot);
+		model.addAttribute("title", "APAP");
 		return "update";
 	}
 	

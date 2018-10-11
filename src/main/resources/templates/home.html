@@ -2,22 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Home</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<script th:src="@{/js/bootstrap.min.js}"></script>
+	<title>Home</title>
+	
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">APAP</a>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
 	<div class="container-fluid">
 		<h2>Hello!</h2>
 		<div class="row">
@@ -38,8 +31,8 @@
 					<div class="card-header">Cari Pilot Berdasarkan Nomor Lisensi</div>
 					<form th:action="@{/pilot/view}" method="GET">
 						<div class="card-body">
-							<label for="licenseNumber">Nomor Lisensi:</label> <input
-								type="text" name="liceseNumber" class="form-control" />
+							<label for="licenseNumber">Nomor Lisensi:</label> 
+							<input type="text" name="licenseNumber" class="form-control" />
 							<p></p>
 							<button type="submit" class="btn btn-primary">Cari</button>
 						</div>
